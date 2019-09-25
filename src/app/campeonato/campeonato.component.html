@@ -1,0 +1,49 @@
+<div class="container-main">
+    <form class="container-form" [formGroup]="campeonatoFormGroup" (ngSubmit)="onSubmit(campeonatoFormGroup.value)">
+        <div class="container-field">
+            <mat-form-field>
+                <input matInput placeholder="Nome do campeonato" formControlName="campeonatoNome">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Limite de times" formControlName="limiteTimes">
+            </mat-form-field>
+        </div>
+        <button mat-raised-button type="submit" [disabled]="!campeonatoFormGroup.valid">Cadastrar</button>
+    </form>
+    <br>
+    <br>
+    <div>-----------------------------------------------------------</div>
+    <button mat-raised-button type="button" (click)="getCampeonatos()">Atualizar campeonatos</button>
+    <div>-----------------------------------------------------------</div>
+    <br>
+    <br>
+</div>
+
+<mat-form-field>
+    <mat-label>Campeonatos</mat-label>
+    <mat-select [formControl]="campeonatoControl">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let campeonato of campeonatos" [value]="campeonato">
+            {{campeonato.campeonatoNome}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<div>
+    <mat-card *ngIf="campeonato != null">
+        <mat-card-header>
+            <mat-card-title>{{campeonato.campeonatoNome}}</mat-card-title>
+            <mat-card-subtitle>Total de times: {{campeonato.totalTimes}} - Limite de times: {{campeonato.limiteTimes}}
+            </mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+</div>
+
+<div *ngIf="times?.length > 0">
+    <mat-card *ngFor="let time of times">
+        <mat-card-header>
+            <mat-card-title>{{time.timeNome}}</mat-card-title>
+            <mat-card-subtitle>{{time.timeAbreviado}}</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+</div>

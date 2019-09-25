@@ -1,0 +1,30 @@
+<div class="container-main">
+    <form class="container-form" [formGroup]="timeFormGroup" (ngSubmit)="onSubmit(timeFormGroup.value)">
+        <div class="container-field">
+            <mat-form-field>
+                <input matInput placeholder="Nome do time" formControlName="timeNome">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Nome do time abreviado" formControlName="timeAbreviado">
+            </mat-form-field>
+        </div>
+        <button mat-raised-button type="submit" [disabled]="!timeFormGroup.valid">Cadastrar</button>
+    </form>
+    <br>
+    <br>
+    <div>-----------------------------------------------------------</div>
+    <button mat-raised-button type="button" (click)="getTimes()">Atualizar tabela</button>
+    <div>-----------------------------------------------------------</div>
+    <br>
+    <br>
+</div>
+<div *ngIf="times?.length > 0">
+    Total de times: {{times.length}}
+</div>
+<br>
+<mat-card *ngFor="let time of times">
+    <mat-card-header>
+        <mat-card-title>{{time.timeNome}}</mat-card-title>
+        <mat-card-subtitle>{{time.timeAbreviado}}</mat-card-subtitle>
+    </mat-card-header>
+</mat-card>
