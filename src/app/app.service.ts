@@ -46,8 +46,16 @@ export class AppService {
     return this.get('/grupo/get');
   }
 
+  getGruposPlayoff() {
+    return this.get('/grupo/playoff/get');
+  }
+
   getTimesGrupo(idGrupo, idCampeonato) {
     return this.get(`/grupo/vinculo/get/${idGrupo}/campeonato/${idCampeonato}`);
+  }
+
+  getTimesPlayoff(idGrupo, idCampeonato) {
+    return this.get(`/playoff/get/${idGrupo}/campeonato/${idCampeonato}`);
   }
 
   getResultadoPorGrupoCampeonato(idGrupo, idCampeonato) {
@@ -76,5 +84,17 @@ export class AppService {
 
   setResultado(resultado: any) {
     return this.put('/resultado/set', resultado);
+  }
+
+  setPlayoffSequence(idCampeonato: any, idGrupo: any, idProximoGrupo: any, limite: any) {
+    return this.put(
+      `/campeonato/criar/sequence/campeonato/${idCampeonato}/grupo/${idGrupo}/proximogrupo/${idProximoGrupo}/limite/${limite}`
+    );
+  }
+
+  setPlayoff(idCampeonato: any, idProximoGrupo: any, limite: any) {
+    return this.put(
+      `/campeonato/criar/playoff/campeonato/${idCampeonato}/proximogrupo/${idProximoGrupo}/limite/${limite}`
+    );
   }
 }

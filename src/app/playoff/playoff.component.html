@@ -1,1 +1,225 @@
-<p>playoff works!</p>
+<div class="accordion-form">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Criar Playoff
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <form [formGroup]="playoffFormGroup" (ngSubmit)="onSubmitPlayoff(playoffFormGroup.value)">
+                <div>
+                    <mat-form-field>
+                        <mat-label>Campeonatos</mat-label>
+                        <mat-select formControlName="campeonato">
+                            <mat-option *ngFor="let campeonato of campeonatos" [value]="campeonato">
+                                {{campeonato.campeonatoNome}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Proximo Grupo a ser criado</mat-label>
+                        <mat-select formControlName="grupoProximo"
+                            [disabled]="!this.playoffFormGroup?.get('campeonato').value.totalTimes > 0">
+                            <mat-option *ngFor="let grupo of grupos" [value]="grupo">
+                                {{grupo.nomeGrupo}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="margin-input">
+                        <input matInput placeholder="Limite de times por grupo" formControlName="limite">
+                    </mat-form-field>
+                </div>
+                <button mat-raised-button type="submit" [disabled]="!playoffFormGroup.valid">Cadastrar</button>
+            </form>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+
+<div class="accordion-form">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Criar Playoff Sequence
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <form [formGroup]="playoffSequenceFormGroup"
+                (ngSubmit)="onSubmitPlayoffSequence(playoffSequenceFormGroup.value)">
+                <div>
+                    <mat-form-field>
+                        <mat-label>Campeonatos</mat-label>
+                        <mat-select formControlName="campeonato">
+                            <mat-option *ngFor="let campeonato of campeonatos" [value]="campeonato">
+                                {{campeonato.campeonatoNome}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Grupos</mat-label>
+                        <mat-select formControlName="grupo"
+                            [disabled]="!this.playoffSequenceFormGroup?.get('campeonato').value.totalTimes > 0">
+                            <mat-option *ngFor="let grupo of grupos" [value]="grupo">
+                                {{grupo.nomeGrupo}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Proximo Grupo a ser criado</mat-label>
+                        <mat-select formControlName="grupoProximo"
+                            [disabled]="!this.playoffSequenceFormGroup?.get('campeonato').value.totalTimes > 0">
+                            <mat-option *ngFor="let grupo of grupos" [value]="grupo"
+                                [disabled]="this.playoffSequenceFormGroup.get('grupo').value.idGrupo == grupo?.idGrupo">
+                                {{grupo.nomeGrupo}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="margin-input">
+                        <input matInput placeholder="Limite de times por grupo" formControlName="limite">
+                    </mat-form-field>
+                </div>
+                <button mat-raised-button type="submit" [disabled]="!playoffSequenceFormGroup.valid">Cadastrar</button>
+            </form>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+
+<div class="accordion-form">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Adicionar Resultado
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="resultadoFormGroup" (ngSubmit)="onSubmitResultado(resultadoFormGroup.value)">
+                <mat-form-field>
+                    <mat-label>Campeonatos</mat-label>
+                    <mat-select formControlName="campeonato">
+                        <mat-option *ngFor="let campeonato of campeonatos" [value]="campeonato">
+                            {{campeonato.campeonatoNome}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div>
+                    <mat-form-field *ngIf="this.resultadoFormGroup?.get('campeonato').value.idCampeonato != null">
+                        <mat-label>Grupos</mat-label>
+                        <mat-select formControlName="grupo"
+                            [disabled]="!this.resultadoFormGroup?.get('campeonato').value.totalTimes > 0">
+                            <mat-option *ngFor="let grupo of grupos" [value]="grupo">
+                                {{grupo.nomeGrupo}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field *ngIf="jogos?.length > 0">
+                        <mat-label>Jogos</mat-label>
+                        <mat-select formControlName="jogo">
+                            <mat-option *ngFor="let jogo of jogos" [value]="jogo">
+                                Id do jogo: {{jogo.idPlayoff}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div *ngIf="jogos != null">
+                    <mat-form-field class="margin-input">
+                        <input matInput placeholder="Time um" formControlName="nmTimeUm">
+                    </mat-form-field>
+                    <mat-form-field class="margin-input">
+                        <input matInput placeholder="Placar time um" formControlName="resultadoTimeUm">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="jogos != null">
+                    <mat-form-field class="margin-input">
+                        <input matInput placeholder="Time dois" formControlName="nmTimeDois">
+                    </mat-form-field>
+                    <mat-form-field class="margin-input">
+                        <input matInput placeholder="Placar time dois" formControlName="resultadoTimeDois">
+                    </mat-form-field>
+                </div>
+                <div *ngIf="times != null">
+                    <mat-form-field>
+                        <mat-label>Time Vencedor</mat-label>
+                        <mat-select formControlName="idTimeVencedor">
+                            <mat-option *ngFor="let time of times" [value]="time.idTime">
+                                {{time.timeNome}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <button mat-raised-button type="submit" [disabled]="!resultadoFormGroup.valid">Cadastrar</button>
+            </form>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <br>
+    <br>
+    <div>-----------------------------------------------------------</div>
+    <button mat-raised-button type="button" (click)="atualizar()">Atualizar</button>
+    <div>-----------------------------------------------------------</div>
+</div>
+
+<mat-form-field>
+    <mat-label>Campeonatos</mat-label>
+    <mat-select [formControl]="campeonatoControl">
+        <mat-option>--</mat-option>
+        <mat-option *ngFor="let campeonato of campeonatos" [value]="campeonato">
+            {{campeonato.campeonatoNome}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<div>
+    <mat-card *ngIf="campeonato != null">
+        <mat-card-header>
+            <mat-card-title>{{campeonato.campeonatoNome}}</mat-card-title>
+            <mat-card-subtitle>Total de times: {{campeonato.totalTimes}} - Limite de times: {{campeonato.limiteTimes}}
+            </mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+</div>
+
+<mat-form-field *ngIf="campeonato != null">
+    <mat-label>Grupos</mat-label>
+    <mat-select [formControl]="grupoControl" [disabled]="!campeonato.totalTimes > 0">
+        <mat-option *ngFor="let grupo of grupos" [value]="grupo">
+            {{grupo.nomeGrupo}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<div *ngIf="timesGrupo?.length > 0">
+    <mat-card *ngFor="let timeGrupo of timesGrupo">
+        <mat-card-header>
+            <mat-card-title>Time: <b>{{timeGrupo.timeUm.timeNome}}</b> VS Time: <b>{{timeGrupo.timeDois.timeNome}}</b>
+            </mat-card-title>
+            <mat-card-subtitle>
+                <p>
+                    Grupo: <b>{{timeGrupo.grupo.nomeGrupo}}</b>
+                </p>
+                <p>
+                    Id Jogo: <b>{{timeGrupo.idPlayoff}}</b>
+                </p>
+                <p>
+                    Time Vencedor: <b>{{timeGrupo.resultado?.timeVencedor.timeNome}}</b>
+                </p>
+                <p>
+                    Resultado: <b>{{timeGrupo.resultado?.resultadoTimeUm}}</b> - Resultado:
+                    <b>{{timeGrupo.resultado?.resultadoTimeDois}}</b>
+                </p>
+            </mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+</div>

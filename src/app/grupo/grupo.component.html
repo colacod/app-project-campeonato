@@ -145,16 +145,19 @@
 <div *ngIf="resultados?.length > 0">
     <mat-card *ngFor="let resultado of resultados">
         <mat-card-header>
-            <mat-card-title>Grupo: {{resultado.grupo.nomeGrupo}} - Resultado: {{resultado.idResultado}}</mat-card-title>
-            <mat-card-subtitle>Time Vencedor: <b>{{resultado.timeVencedor.timeNome}}</b></mat-card-subtitle>
+            <mat-card-title>Time: {{resultado.timeUm.timeNome}} VS Time: {{resultado.timeDois.timeNome}}
+            </mat-card-title>
+            <mat-card-subtitle>
+                <p>
+                    Grupo: <b>{{resultado.grupo.nomeGrupo}}</b> - Resultado: <b>{{resultado.idResultado}}</b>
+                </p>
+                <p>
+                    Time Vencedor: <b>{{resultado.timeVencedor.timeNome}}</b>
+                </p>
+                <p>
+                    Resultado: <b>{{resultado.resultadoTimeUm}}</b> - Resultado: <b>{{resultado.resultadoTimeDois}}</b>
+                </p>
+            </mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
-            <p>
-                Time: {{resultado.timeUm.timeNome}} VS Time: {{resultado.timeDois.timeNome}}
-            </p>
-            <p>
-                Resultado: {{resultado.resultadoTimeUm}} - Resultado: {{resultado.resultadoTimeDois}}
-            </p>
-        </mat-card-content>
     </mat-card>
 </div>
