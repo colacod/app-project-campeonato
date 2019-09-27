@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 const port = '8080';
-const url = window.location.protocol + '//' + window.location.hostname + ':' + port;
+const url = 'https://rest-compeonato.herokuapp.com';
 
 export const environment = {
   production: false,
