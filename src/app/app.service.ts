@@ -86,15 +86,15 @@ export class AppService {
     return this.put('/resultado/set', resultado);
   }
 
-  setPlayoffSequence(idCampeonato: any, idGrupo: any, idProximoGrupo: any, limite: any) {
+  setPlayoffSequence(idCampeonato: any, idGrupo: any, idProximoGrupo: any) {
     return this.put(
-      `/campeonato/criar/sequence/campeonato/${idCampeonato}/grupo/${idGrupo}/proximogrupo/${idProximoGrupo}/limite/${limite}`
+      `/campeonato/criar/sequence/campeonato/${idCampeonato}/grupo/${idGrupo}/proximogrupo/${idProximoGrupo}`
     );
   }
 
-  setPlayoff(idCampeonato: any, idProximoGrupo: any, limite: any) {
+  setPlayoff(idCampeonato: any, idProximoGrupo: any) {
     return this.put(
-      `/campeonato/criar/playoff/campeonato/${idCampeonato}/proximogrupo/${idProximoGrupo}/limite/${limite}`
+      `/campeonato/criar/playoff/campeonato/${idCampeonato}/proximogrupo/${idProximoGrupo}`
     );
   }
 }

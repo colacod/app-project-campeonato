@@ -1,14 +1,3 @@
-<div>
-    <p>
-        Limite: Quantidade de times que iram passar para a proxima fase de acordo com seu grupo
-    </p>
-    <p>
-        Exemplo: Grupo: limite sempre 2
-    </p>
-    <p>
-        Exemplo: Playoffs: quantidade de times / 2 = limite
-    </p>
-</div>
 <div class="accordion-form">
     <mat-accordion>
         <mat-expansion-panel>
@@ -38,11 +27,6 @@
                                 {{grupo.nomeGrupo}}
                             </mat-option>
                         </mat-select>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field class="margin-input">
-                        <input matInput placeholder="Limite de times por grupo" formControlName="limite">
                     </mat-form-field>
                 </div>
                 <button mat-raised-button type="submit" [disabled]="!playoffFormGroup.valid">Cadastrar</button>
@@ -93,11 +77,6 @@
                                 {{grupo.nomeGrupo}}
                             </mat-option>
                         </mat-select>
-                    </mat-form-field>
-                </div>
-                <div>
-                    <mat-form-field class="margin-input">
-                        <input matInput placeholder="Limite de times por grupo" formControlName="limite">
                     </mat-form-field>
                 </div>
                 <button mat-raised-button type="submit" [disabled]="!playoffSequenceFormGroup.valid">Cadastrar</button>

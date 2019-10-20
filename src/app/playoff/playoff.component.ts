@@ -31,20 +31,12 @@ export class PlayoffComponent implements OnInit {
       campeonato: ['', Validators.required],
       grupo: ['', Validators.required],
       grupoProximo: ['', Validators.required],
-      limite: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[0-9]*$')
-      ])],
     });
 
     this.playoffFormGroup = this.fb.group({
       campeonato: ['', Validators.required],
       grupoProximo: ['', Validators.required],
-      limite: ['', Validators.compose([
-        Validators.required,
-        Validators.pattern('^[0-9]*$')
-      ])],
-    });
+     });
 
     this.resultadoFormGroup = this.fb.group({
       campeonato: ['', Validators.required],
@@ -141,7 +133,7 @@ export class PlayoffComponent implements OnInit {
 
   onSubmitPlayoff(value) {
     this.appService.setPlayoff(
-      value.campeonato.idCampeonato, value.grupoProximo.idGrupo, value.limite
+      value.campeonato.idCampeonato, value.grupoProximo.idGrupo
     ).subscribe(r => {
       console.log(r);
     });
@@ -149,7 +141,7 @@ export class PlayoffComponent implements OnInit {
 
   onSubmitPlayoffSequence(value) {
     this.appService.setPlayoffSequence(
-      value.campeonato.idCampeonato, value.grupo.idGrupo, value.grupoProximo.idGrupo, value.limite
+      value.campeonato.idCampeonato, value.grupo.idGrupo, value.grupoProximo.idGrupo
     ).subscribe(r => {
       console.log(r);
     });
